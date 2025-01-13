@@ -25,13 +25,13 @@ The ONVIF camera integration allows you to use an [ONVIF](https://www.onvif.org/
 
 {% include integrations/config_flow.md %}
 
-<div class='note'>
-  It is recommended that you create a user on your device specifically for Home Assistant. For all current functionality, it is enough to create a standard user.
-</div>
+{% tip %}
+It is recommended that you create a user on your device specifically for Home Assistant. For all current functionality, it is enough to create a standard user.
+{% endtip %}
 
-<div class='note'>
-If running Home assistant Core in a venv, ensure that libxml2 and libxslt python interfaces are installed via your package manager.
-</div>
+{% note %}
+If running Home Assistant Core in a venv, ensure that libxml2 and libxslt Python interfaces are installed via your package manager.
+{% endnote %}
 
 ### Configuration notes
 
@@ -63,39 +63,40 @@ To help with development of this integration, enable `info` level logging for `h
 
 | Topic(s) | Entity Type | Device Class | Description |
 |----------|-------------|--------------|-------------|
-| Motion Alarm | Binary Sensor | Motion | Generic motion alarm. |
-| Field Detection | Binary Sensor | Motion | Polygonal field detection determines if each object in the scene is inside or outside the polygon. |
-| Cell Motion Detection | Binary Sensor | Motion | Cell based motion detection determined by placing a grid over the video source and determining changes. |
-| Motion Region Detector | Binary Sensor | Motion | Detects any motion against the specified motion region. The rule is configured for an area defined by a polygon. |
-| Detected Sound | Binary Sensor | Sound | Device detected sound. |
-| Digital Input | Binary Sensor | None | A digital input was triggered on the device. Amcrest is known to use this as a doorbell button press on the AD410. |
-| Relay Triggered | Binary Sensor | None | Device relay output was triggered. |
-| Image Too Blurry | Binary Sensor | Problem | Device reports blurry image. |
-| Image Too Dark | Binary Sensor | Problem | Device reports dark image. |
-| Image Too Bright | Binary Sensor | Problem | Device reports bright image. |
-| Global Scene Change | Binary Sensor | Problem | Device reports a large portion of the video content changing.  The cause can be tamper actions like camera movement or coverage. |
-| Tamper Detector | Binary Sensor | Problem |  Detects any kind of tampering to the image sensor. |
-| Storage Failure | Binary Sensor | Problem | Storage failure on device. |
-| Recording Job State | Binary Sensor | None | Whether or not the device is actively recording. |
-| Processor Usage | Sensor | Percent | Device processor usage. |
-| Last Reboot | Sensor | Timestamp | When the device was last rebooted. |
-| Last Reset | Sensor | Timestamp | When the device was last reset. |
+| Motion alarm | Binary sensor | Motion | Generic motion alarm. |
+| Field detection | Binary sensor | Motion | Polygonal field detection determines if each object in the scene is inside or outside the polygon. |
+| Cell motion detection | Binary sensor | Motion | Cell based motion detection determined by placing a grid over the video source and determining changes. |
+| Human shape detection | Binary sensor | Motion | Detection of human shapes by on-camera recognition algorithm. |
+| Motion region detector | Binary sensor | Motion | Detects any motion against the specified motion region. The rule is configured for an area defined by a polygon. |
+| Detected sound | Binary sensor | Sound | Device detected sound. |
+| Digital input | Binary sensor | None | A digital input was triggered on the device. Amcrest is known to use this as a doorbell button press on the AD410. |
+| Relay triggered | Binary sensor | None | Device relay output was triggered. |
+| Image too blurry | Binary sensor | Problem | Device reports blurry image. |
+| Image too dark | Binary sensor | Problem | Device reports dark image. |
+| Image too bright | Binary sensor | Problem | Device reports bright image. |
+| Global scene change | Binary sensor | Problem | Device reports a large portion of the video content changing.  The cause can be tamper actions like camera movement or coverage. |
+| Tamper detector | Binary sensor | Problem |  Detects any kind of tampering to the image sensor. |
+| Storage failure | Binary sensor | Problem | Storage failure on device. |
+| Recording job state | Binary sensor | None | Whether or not the device is actively recording. |
+| Processor usage | Sensor | Percent | Device processor usage. |
+| Last reboot | Sensor | Timestamp | When the device was last rebooted. |
+| Last reset | Sensor | Timestamp | When the device was last reset. |
 | Last Clock Synchronization | Sensor | Timestamp | When the device clock was last synchronized. |
 | Last Backup | Sensor | Timestamp | When the last backup of the device configuration has been retrieved. |
 
 If you are running into trouble with this sensor, please refer to the [Troubleshooting section](/integrations/ffmpeg/#troubleshooting).
 
-### Service `onvif.ptz`
+### Action `onvif.ptz`
 
-If your ONVIF camera supports PTZ, you will be able to pan, tilt or zoom your camera.
+If your ONVIF camera supports <abbr title="pan, tilt, and zoom">PTZ</abbr>, you will be able to pan, tilt or zoom your camera.
 
-| Service data attribute | Description |
+| Data attribute | Description |
 | -----------------------| ----------- |
 | `entity_id` | String or list of strings that point at `entity_id`s of cameras. Use `entity_id: all` to target all. |
 | `tilt` | Tilt direction. Allowed values: `UP`, `DOWN`, `NONE` |
 | `pan` | Pan direction. Allowed values: `RIGHT`, `LEFT`, `NONE` |
 | `zoom` | Zoom. Allowed values: `ZOOM_IN`, `ZOOM_OUT`, `NONE` |
-| `distance` | Distance coefficient. Sets how much PTZ should be executed in one request. Allowed values: floating point numbers, 0 to 1. Default : 0.1 |
+| `distance` | Distance coefficient. Sets how much <abbr title="pan, tilt, and zoom">PTZ</abbr> should be executed in one request. Allowed values: floating point numbers, 0 to 1. Default : 0.1 |
 | `speed` | Speed coefficient. Sets how fast PTZ will be executed. Allowed values: floating point numbers, 0 to 1. Default : 0.5 |
 | `preset` | PTZ preset profile token. Sets the preset profile token which is executed with GotoPreset. |
 | `move_mode` | PTZ moving mode. Allowed values: `ContinuousMove`, `RelativeMove`, `AbsoluteMove`, `GotoPreset`, `Stop`. Default :`RelativeMove` |

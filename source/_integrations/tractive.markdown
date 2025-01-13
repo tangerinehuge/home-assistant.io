@@ -2,7 +2,7 @@
 title: Tractive
 description: Instructions on how to integrate Tractive within Home Assistant.
 ha_category:
-  - Presence Detection
+  - Presence detection
 ha_release: 2021.9
 ha_iot_class: Cloud Push
 ha_config_flow: true
@@ -29,6 +29,10 @@ The Tractive integration allows you to monitor locations of your pets from withi
 To use the integration you must be a premium tractive client.
 
 {% include integrations/config_flow.md %}
+
+{% important %}
+Due to Tractive API limitations, trackers (pets) that are shared from another account to your account are not visible in Home Assistant. You need to configure all Tractive accounts from which trackers (pets) come from with Home Assistant.
+{% endimportant %}
 
 ## Integration entities
 
